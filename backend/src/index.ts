@@ -1,14 +1,5 @@
 /**
- * Zero-Knowledge File Sharing - Backend Server
- *
- * Express server with:
- * - AES-256-GCM encrypted file storage
- * - JWT authentication
- * - Rate limiting
- * - Security headers (Helmet)
- * - Access logging
- *
- * The server NEVER sees encryption keys (zero-knowledge principle)
+ * Backend server for encrypted file sharing.
  */
 
 import express from 'express';
@@ -33,10 +24,6 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Create Express app
 const app = express();
-
-/**
- * MIDDLEWARE SETUP
- */
 
 // Security headers
 app.use(helmet({
@@ -75,10 +62,6 @@ if (NODE_ENV === 'development') {
   app.use(morgan('combined'));
 }
 
-/**
- * ROUTES
- */
-
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -105,10 +88,6 @@ if (NODE_ENV === 'production') {
   });
 }
 
-/**
- * ERROR HANDLING
- */
-
 // 404 handler for API routes
 app.use('/api/*', (req, res) => {
   res.status(404).json({ error: 'Endpoint not found' });
@@ -124,14 +103,10 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   });
 });
 
-/**
- * START SERVER
- */
-
 app.listen(PORT, () => {
   console.log('');
   console.log('='.repeat(60));
-  console.log('🔐 Zero-Knowledge File Sharing Server');
+  console.log('Zero-Knowledge File Sharing Server');
   console.log('='.repeat(60));
   console.log(`Environment: ${NODE_ENV}`);
   console.log(`Server running on: http://localhost:${PORT}`);

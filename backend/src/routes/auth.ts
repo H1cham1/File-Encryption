@@ -1,9 +1,5 @@
 /**
- * Authentication Routes
- *
- * Handles user authentication:
- * - POST /api/auth/register - Register new user
- * - POST /api/auth/login - Login existing user
+ * Authentication routes.
  */
 
 import { Router, Request, Response } from 'express';

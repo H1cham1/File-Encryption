@@ -1,8 +1,5 @@
 /**
- * Database Connection
- *
- * Manages SQLite database connection using better-sqlite3.
- * Provides synchronous API which is faster and simpler than sqlite3.
+ * Database connection and query utilities.
  */
 
 import Database from 'better-sqlite3';

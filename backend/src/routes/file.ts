@@ -1,12 +1,5 @@
 /**
- * File Routes
- *
- * Handles file downloads (public, no auth required)
- * - GET /api/file/:fileId/metadata - Get file metadata
- * - GET /api/file/:fileId/blob - Download encrypted file
- *
- * IMPORTANT: These endpoints return ENCRYPTED data only
- * The decryption key is in the URL fragment and never reaches the server
+ * File download routes (public endpoints).
  */
 
 import { Router, Request, Response } from 'express';

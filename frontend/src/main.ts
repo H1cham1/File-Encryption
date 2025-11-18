@@ -1,11 +1,5 @@
 /**
- * Main Application Entry Point
- *
- * Handles all frontend logic:
- * - Authentication (login/register)
- * - File encryption and upload
- * - File decryption and download
- * - UI state management
+ * Main application entry point.
  */
 
 import {
@@ -90,21 +84,29 @@ function initMainPage(): void {
  * Setup authentication event listeners
  */
 function setupAuthListeners(): void {
-  const loginForm = document.getElementById('login-form') as HTMLFormElement;
-  const registerForm = document.getElementById('register-form') as HTMLFormElement;
+  const loginForm = document.querySelector('#login-form form') as HTMLFormElement;
+  const registerForm = document.querySelector('#register-form form') as HTMLFormElement;
   const showRegisterBtn = document.getElementById('show-register');
   const showLoginBtn = document.getElementById('show-login');
   const logoutBtn = document.getElementById('logout-btn');
 
   // Toggle between login and register forms
   showRegisterBtn?.addEventListener('click', () => {
-    hide(loginForm);
-    show(registerForm);
+    const loginDiv = document.getElementById('login-form');
+    const registerDiv = document.getElementById('register-form');
+    if (loginDiv && registerDiv) {
+      hide(loginDiv);
+      show(registerDiv);
+    }
   });
 
   showLoginBtn?.addEventListener('click', () => {
-    hide(registerForm);
-    show(loginForm);
+    const loginDiv = document.getElementById('login-form');
+    const registerDiv = document.getElementById('register-form');
+    if (loginDiv && registerDiv) {
+      hide(registerDiv);
+      show(loginDiv);
+    }
   });
 
   // Handle login
@@ -428,15 +430,15 @@ async function loadMyFiles(): Promise<void> {
               <span>${file.downloadCount} downloads</span>
             </div>
             <div class="file-expiry ${file.expired ? 'expired' : ''}">
-              ${file.expired ? '❌ Expired' : `⏰ Expires: ${getTimeRemaining(file.expiryTime)}`}
+              ${file.expired ? 'Expired' : `Expires: ${getTimeRemaining(file.expiryTime)}`}
             </div>
           </div>
           <div class="file-actions">
             ${shareLink && !file.expired ? `
-              <button class="btn btn-sm" onclick="copyFileLink('${shareLink}')">📋 Copy Link</button>
+              <button class="btn btn-sm" onclick="copyFileLink('${shareLink}')">Copy Link</button>
             ` : ''}
-            ${!hasKey ? `<span class="no-key-warning">⚠️ Key not found</span>` : ''}
-            <button class="btn btn-sm btn-delete" onclick="deleteMyFile('${file.id}')">🗑️ Delete</button>
+            ${!hasKey ? `<span class="no-key-warning">Key not found</span>` : ''}
+            <button class="btn btn-sm btn-delete" onclick="deleteMyFile('${file.id}')">Delete</button>
           </div>
         </div>
       `;

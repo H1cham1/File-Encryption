@@ -1,11 +1,5 @@
 /**
- * Upload Routes
- *
- * Handles encrypted file uploads (requires authentication)
- * POST /api/upload - Upload encrypted file
- *
- * IMPORTANT: The server NEVER sees the encryption key (zero-knowledge)
- * Only encrypted data (ciphertext) + IV + metadata is stored
+ * Upload routes for encrypted file storage.
  */
 
 import { Router, Response } from 'express';

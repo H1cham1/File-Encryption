@@ -1,11 +1,5 @@
 /**
- * Database Migration - Initial Schema
- *
- * Creates the initial database schema with tables for:
- * - users: User accounts for authentication
- * - files: Encrypted file metadata
- * - logs: Security and access logs
- *
+ * Database migration script.
  * Run with: npm run migrate
  */
 
@@ -24,7 +18,7 @@ function migrate() {
         createdAt TEXT NOT NULL
       )
     `);
-    console.log('✓ Created users table');
+    console.log('Created users table');
 
     // Create files table
     dbRun(`
@@ -42,14 +36,14 @@ function migrate() {
         FOREIGN KEY (ownerId) REFERENCES users(id) ON DELETE CASCADE
       )
     `);
-    console.log('✓ Created files table');
+    console.log('Created files table');
 
     // Create index on expiryTime for faster cleanup queries
     dbRun(`
       CREATE INDEX IF NOT EXISTS idx_files_expiry
       ON files(expiryTime)
     `);
-    console.log('✓ Created index on files.expiryTime');
+    console.log('Created index on files.expiryTime');
 
     // Create logs table
     dbRun(`
@@ -64,25 +58,25 @@ function migrate() {
         FOREIGN KEY (fileId) REFERENCES files(id) ON DELETE SET NULL
       )
     `);
-    console.log('✓ Created logs table');
+    console.log('Created logs table');
 
     // Create index on timestamp for faster log queries
     dbRun(`
       CREATE INDEX IF NOT EXISTS idx_logs_timestamp
       ON logs(timestamp)
     `);
-    console.log('✓ Created index on logs.timestamp');
+    console.log('Created index on logs.timestamp');
 
     // Create index on eventType for filtering
     dbRun(`
       CREATE INDEX IF NOT EXISTS idx_logs_eventType
       ON logs(eventType)
     `);
-    console.log('✓ Created index on logs.eventType');
+    console.log('Created index on logs.eventType');
 
-    console.log('\n✅ Migration completed successfully!\n');
+    console.log('\nMigration completed successfully\n');
   } catch (error) {
-    console.error('❌ Migration failed:', error);
+    console.error('Migration failed:', error);
     process.exit(1);
   } finally {
     closeDatabase();

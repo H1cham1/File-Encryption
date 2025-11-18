@@ -1,8 +1,5 @@
 /**
- * User Model
- *
- * Defines the User type and database schema for authentication.
- * Passwords are stored as bcrypt hashes, never in plaintext.
+ * User model for authentication.
  */
 
 export interface User {

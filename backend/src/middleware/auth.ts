@@ -1,8 +1,5 @@
 /**
- * Authentication Middleware
- *
- * Validates JWT tokens and protects routes.
- * Adds user information to request object after successful validation.
+ * JWT authentication middleware.
  */
 
 import { Request, Response, NextFunction } from 'express';

@@ -1,11 +1,5 @@
 /**
- * Cleanup Expired Files Script
- *
- * Removes expired files from:
- * - Database (files table)
- * - Disk storage
- *
- * Can be run manually or scheduled as a cron job
+ * Cleanup script for expired files.
  * Run with: npm run cleanup
  */
 
@@ -26,7 +20,7 @@ function cleanupExpiredFiles() {
     );
 
     if (expiredFiles.length === 0) {
-      console.log('✓ No expired files found');
+      console.log('No expired files found');
       return;
     }
 
@@ -46,20 +40,20 @@ function cleanupExpiredFiles() {
         // Delete file from disk
         try {
           fs.unlinkSync(file.path);
-          console.log(`  ✓ Deleted from disk: ${file.path}`);
+          console.log(`  Deleted from disk: ${file.path}`);
         } catch (error) {
           // File might already be deleted, log but continue
-          console.log(`  ⚠ File not found on disk: ${file.path}`);
+          console.log(`  Warning: File not found on disk: ${file.path}`);
         }
 
         // Delete from database
         dbRun('DELETE FROM files WHERE id = ?', [file.id]);
-        console.log(`  ✓ Deleted from database`);
+        console.log(`  Deleted from database`);
 
         deletedCount++;
         console.log('');
       } catch (error) {
-        console.error(`  ✗ Error deleting file ${file.id}:`, error);
+        console.error(`  Error deleting file ${file.id}:`, error);
         errorCount++;
         console.log('');
       }
@@ -73,7 +67,7 @@ function cleanupExpiredFiles() {
     console.log(`  Errors: ${errorCount}`);
     console.log('='.repeat(50));
   } catch (error) {
-    console.error('❌ Cleanup failed:', error);
+    console.error('Cleanup failed:', error);
     process.exit(1);
   } finally {
     closeDatabase();

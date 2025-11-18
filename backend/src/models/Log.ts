@@ -1,8 +1,5 @@
 /**
- * Log Model
- *
- * Defines types for security and access logging.
- * Used to track downloads, rate limiting, and suspicious activity.
+ * Log model for event tracking.
  */
 
 export type EventType =

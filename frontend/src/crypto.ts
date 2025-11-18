@@ -1,15 +1,6 @@
 /**
- * Cryptography Module - Web Crypto API
- *
- * Implements AES-256-GCM encryption/decryption using the Web Crypto API.
- * All cryptographic operations happen CLIENT-SIDE ONLY.
- * The server NEVER sees the encryption key (zero-knowledge principle).
- *
- * Key features:
- * - AES-256-GCM encryption (authenticated encryption)
- * - Random 256-bit keys
- * - Random 12-byte IVs per file
- * - Base64URL encoding for URL-safe keys
+ * Cryptography module using Web Crypto API.
+ * AES-256-GCM encryption with client-side key generation.
  */
 
 /**
@@ -194,7 +185,7 @@ export function formatFileSize(bytes: number): string {
 export function storeFileKey(fileId: string, keyBase64Url: string): void {
   const keys = getStoredFileKeys();
   keys[fileId] = keyBase64Url;
-  localStorage.setItem('file_keys', JSON.stringify(keys));
+  sessionStorage.setItem('file_keys', JSON.stringify(keys));
 }
 
 /**
@@ -214,7 +205,7 @@ export function getStoredFileKey(fileId: string): string | null {
  * @returns Object mapping fileId to keyBase64Url
  */
 export function getStoredFileKeys(): Record<string, string> {
-  const stored = localStorage.getItem('file_keys');
+  const stored = sessionStorage.getItem('file_keys');
   return stored ? JSON.parse(stored) : {};
 }
 
@@ -226,5 +217,5 @@ export function getStoredFileKeys(): Record<string, string> {
 export function removeStoredFileKey(fileId: string): void {
   const keys = getStoredFileKeys();
   delete keys[fileId];
-  localStorage.setItem('file_keys', JSON.stringify(keys));
+  sessionStorage.setItem('file_keys', JSON.stringify(keys));
 }

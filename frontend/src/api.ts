@@ -1,8 +1,5 @@
 /**
- * API Module
- *
- * Handles all communication with the backend server.
- * Manages authentication tokens and API requests.
+ * API client for backend communication.
  */
 
 // Backend API base URL
@@ -50,21 +47,21 @@ export interface FileBlob {
  * Get stored authentication token
  */
 export function getToken(): string | null {
-  return localStorage.getItem(TOKEN_KEY);
+  return sessionStorage.getItem(TOKEN_KEY);
 }
 
 /**
  * Store authentication token
  */
 export function setToken(token: string): void {
-  localStorage.setItem(TOKEN_KEY, token);
+  sessionStorage.setItem(TOKEN_KEY, token);
 }
 
 /**
  * Remove authentication token (logout)
  */
 export function clearToken(): void {
-  localStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
 }
 
 /**

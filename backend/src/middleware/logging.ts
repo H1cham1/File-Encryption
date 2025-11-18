@@ -1,8 +1,5 @@
 /**
- * Logging Middleware
- *
- * Logs security events and access attempts to the database.
- * Used for audit trails and detecting suspicious activity.
+ * Event logging middleware.
  */
 
 import { Request } from 'express';

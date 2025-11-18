@@ -1,9 +1,5 @@
 /**
- * My Files Routes
- *
- * Handles user's uploaded files management
- * - GET /api/myfiles - Get all files uploaded by current user
- * - DELETE /api/myfiles/:fileId - Delete a file
+ * User file management routes.
  */
 
 import { Router, Response } from 'express';

@@ -1,9 +1,5 @@
 /**
- * File Model
- *
- * Defines types for encrypted file storage.
- * The server ONLY stores encrypted data (ciphertext) + metadata.
- * The encryption key is NEVER known to the server (zero-knowledge principle).
+ * File model for encrypted storage.
  */
 
 export interface EncryptedFile {

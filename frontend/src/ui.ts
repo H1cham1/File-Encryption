@@ -1,7 +1,5 @@
 /**
- * UI Helper Module
- *
- * Contains helper functions for DOM manipulation and UI updates
+ * UI helper functions.
  */
 
 /**
