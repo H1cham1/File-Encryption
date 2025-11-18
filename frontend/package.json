@@ -1,0 +1,24 @@
+{
+  "name": "zk-file-sharing-frontend",
+  "version": "1.0.0",
+  "description": "Zero-knowledge file sharing frontend with Web Crypto API",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "encryption",
+    "zero-knowledge",
+    "file-sharing",
+    "web-crypto-api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "dependencies": {}
+}

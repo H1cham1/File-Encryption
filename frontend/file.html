@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download File - Zero-Knowledge File Sharing</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔐 Zero-Knowledge File Sharing</h1>
+      <p class="subtitle">Download and decrypt your file securely in your browser</p>
+    </header>
+
+    <!-- Message display area -->
+    <div id="message" class="message hidden"></div>
+
+    <!-- Loading overlay -->
+    <div id="loading" class="loading hidden">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Download Section -->
+    <section class="section">
+      <h2>Download Encrypted File</h2>
+
+      <div class="download-info">
+        <p>
+          This file is end-to-end encrypted. The decryption will happen in your browser
+          using the encryption key from the URL. The server never sees the decryption key.
+        </p>
+      </div>
+
+      <!-- File Metadata -->
+      <div id="file-metadata" class="file-metadata hidden"></div>
+
+      <!-- Download Button -->
+      <button id="download-btn" class="btn btn-primary btn-large hidden">
+        Download & Decrypt File
+      </button>
+
+      <div class="back-link">
+        <a href="/">← Upload a new file</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built with AES-256-GCM encryption using the Web Crypto API</p>
+      <p>Your privacy is protected - decryption happens entirely in your browser</p>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

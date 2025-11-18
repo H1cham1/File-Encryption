@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero-Knowledge File Sharing</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔐 Zero-Knowledge File Sharing</h1>
+      <p class="subtitle">End-to-end encrypted file sharing. Your files are encrypted in your browser before upload.</p>
+    </header>
+
+    <!-- Message display area -->
+    <div id="message" class="message hidden"></div>
+
+    <!-- Loading overlay -->
+    <div id="loading" class="loading hidden">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Loading...</p>
+    </div>
+
+    <!-- Authentication Section -->
+    <section id="auth-section" class="section">
+      <!-- Login Form -->
+      <div id="login-form" class="auth-form">
+        <h2>Login</h2>
+        <form>
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required placeholder="Password (min 8 characters)">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <p class="form-footer">
+            Don't have an account?
+            <a href="#" id="show-register">Register here</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div id="register-form" class="auth-form hidden">
+        <h2>Create Account</h2>
+        <form>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" required placeholder="Min 8 characters">
+          </div>
+          <div class="form-group">
+            <label for="register-confirm-password">Confirm Password</label>
+            <input type="password" id="register-confirm-password" required placeholder="Confirm password">
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+          <p class="form-footer">
+            Already have an account?
+            <a href="#" id="show-login">Login here</a>
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="upload-section" class="section hidden">
+      <div class="upload-header">
+        <h2>Upload Encrypted File</h2>
+        <button id="logout-btn" class="btn btn-secondary">Logout</button>
+      </div>
+
+      <div class="upload-container">
+        <div class="upload-info">
+          <h3>How it works:</h3>
+          <ol>
+            <li>Select a file from your computer</li>
+            <li>The file is encrypted in your browser using AES-256-GCM</li>
+            <li>Only the encrypted data is uploaded to the server</li>
+            <li>You receive a shareable link with the decryption key</li>
+            <li>Anyone with the link can download and decrypt the file</li>
+          </ol>
+          <p class="warning">
+            <strong>Note:</strong> Files expire after 24 hours by default.
+            The server NEVER sees your encryption key (zero-knowledge).
+          </p>
+        </div>
+
+        <div class="upload-form">
+          <div class="form-group">
+            <label for="file-input" class="file-label">Choose File</label>
+            <input type="file" id="file-input" class="file-input">
+            <p id="file-info" class="file-info hidden"></p>
+          </div>
+
+          <button id="upload-btn" class="btn btn-primary btn-large">
+            Encrypt & Upload File
+          </button>
+        </div>
+      </div>
+
+      <!-- Share Link Section -->
+      <div id="share-link-section" class="share-link-section hidden">
+        <h3>✅ File Uploaded Successfully!</h3>
+        <p>Share this link to allow others to download your encrypted file:</p>
+
+        <div class="share-link-container">
+          <input type="text" id="share-link" readonly class="share-link-input">
+          <button id="copy-link-btn" class="btn btn-primary">Copy Link</button>
+        </div>
+
+        <p id="expiry-info" class="expiry-info"></p>
+
+        <p class="warning">
+          <strong>Important:</strong> The encryption key is in the URL fragment (after #).
+          Anyone with this link can decrypt and download the file.
+          Keep it secure!
+        </p>
+      </div>
+
+      <!-- My Files Section -->
+      <div id="my-files-section" class="my-files-section hidden">
+        <h3>📁 My Uploaded Files</h3>
+        <div id="my-files-list"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built with AES-256-GCM encryption using the Web Crypto API</p>
+      <p>Your privacy is protected - the server never sees your encryption keys</p>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
